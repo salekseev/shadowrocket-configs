@@ -1,0 +1,12 @@
+# NAME: Kinopoisk
+# AUTHOR: salekseev
+# REPO: https://github.com/salekseev/shadowrocket-configs
+# UPDATED: 2024-08-28 18:00:00
+
+// Kinopoisk
+DOMAIN-SUFFIX,kinopoisk.ru
+DOMAIN-SUFFIX,hd.kinopoisk.ru
+DOMAIN-SUFFIX,sso.kinopoisk.ru
+DOMAIN-SUFFIX,api.ott.kinopoisk.ru
+DOMAIN-SUFFIX,graphql.kinopoisk.ru
+DOMAIN-SUFFIX,payment-widget.plus.kinopoisk.ru
