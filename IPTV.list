@@ -1,0 +1,8 @@
+# NAME: IPTV
+# AUTHOR: salekseev
+# REPO: https://github.com/salekseev/shadowrocket-configs
+# UPDATED: 2025-04-14 22:00:00
+
+// ZABAVA IPTV
+DOMAIN-SUFFIX,zabava-htlive.cdn.ngenix.net
+DOMAIN-SUFFIX,cdn.ngenix.net
