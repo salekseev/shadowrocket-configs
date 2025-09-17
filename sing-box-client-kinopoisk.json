@@ -14,7 +14,7 @@
         "tag": "remote",
         "address": "tls://one.one.one.one",
         "address_resolver": "local",
-        "detour": "select-ou"
+        "detour": "select-out"
       },
       {
         "tag": "dns-block",
@@ -119,7 +119,7 @@
           "kinopoisk.ru"
         ],
         "action": "route",
-        "outbound": "select-ou"
+        "outbound": "select-out"
       },
       {
         "ip_is_private": true,
