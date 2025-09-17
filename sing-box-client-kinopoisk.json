@@ -1,0 +1,141 @@
+{
+  "log": {
+    "level": "info",
+    "timestamp": true
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "local",
+        "address": "local",
+        "detour": "direct"
+      },
+      {
+        "tag": "remote",
+        "address": "tls://one.one.one.one",
+        "address_resolver": "local",
+        "detour": "vless-out"
+      },
+      {
+        "tag": "dns-block",
+        "address": "rcode://success"
+      }
+    ],
+    "rules": [
+      {
+        "domain_suffix": [
+          "xn--d1acpjx3f.xn--p1ai",
+          "ya.ru",
+          "yandex.com",
+          "yandex.net",
+          "yandex.ru",
+          "yastatic.net",
+          "kinopoisk.ru"
+        ],
+        "server": "remote"
+      }
+    ],
+    "final": "local",
+    "strategy": "prefer_ipv4",
+    "reverse_mapping": true
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "address": [
+        "172.19.0.1/30",
+        "fdfe:dcba:9876::1/126"
+      ],
+      "auto_route": true,
+      "strict_route": true,
+      "stack": "system"
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "selector",
+      "tag": "select-out",
+      "outbounds": [
+        "auto-out",
+        "vless-out-iota"
+      ],
+      "default": "auto-out"
+    },
+    {
+      "type": "vless",
+      "tag": "vless-out-iota",
+      "server": "iota.157539.xyz",
+      "server_port": 443,
+      "uuid": "3c1890e2-c768-4247-8a3b-032f6ed13a32",
+      "tls": {
+        "enabled": true,
+        "server_name": "iota.157539.xyz",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/vless",
+        "headers": {
+          "Host": "iota.157539.xyz"
+        }
+      }
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "urltest",
+      "tag": "auto-out",
+      "outbounds": [
+        "vless-out-iota"
+      ],
+      "url": "https://yastatic.net/s3/home/icons/general/plus-outline.svg",
+      "interval": "1m0s",
+      "tolerance": 50
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "action": "sniff"
+      },
+      {
+        "protocol": "dns",
+        "action": "hijack-dns"
+      },
+      {
+        "domain_suffix": [
+          "xn--d1acpjx3f.xn--p1ai",
+          "ya.ru",
+          "yandex.com",
+          "yandex.net",
+          "yandex.ru",
+          "yastatic.net",
+          "kinopoisk.ru"
+        ],
+        "action": "route",
+        "outbound": "vless-out"
+      },
+      {
+        "ip_is_private": true,
+        "action": "route",
+        "outbound": "direct"
+      },
+      {
+        "domain_suffix": [
+          ".local",
+          ".lan"
+        ],
+        "action": "route",
+        "outbound": "direct"
+      }
+    ],
+    "final": "direct",
+    "auto_detect_interface": true
+  }
+}
