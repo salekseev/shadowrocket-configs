@@ -32,7 +32,7 @@
           "yastatic.net",
           "kinopoisk.ru"
         ],
-        "server": "remote"
+        "server": "local"
       }
     ],
     "final": "local",
