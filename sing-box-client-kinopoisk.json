@@ -7,13 +7,12 @@
     "servers": [
       {
         "tag": "local",
-        "address": "local",
+        "address": "dhcp://auto",
         "detour": "direct"
       },
       {
         "tag": "remote",
-        "address": "tls://one.one.one.one",
-        "address_resolver": "local",
+        "address": "tls://1.1.1.1",
         "detour": "select-out"
       },
       {
@@ -32,7 +31,7 @@
           "yastatic.net",
           "kinopoisk.ru"
         ],
-        "server": "local"
+        "server": "remote"
       }
     ],
     "final": "local",
